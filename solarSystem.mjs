@@ -22,22 +22,28 @@ scene.add(axis)
 //const arrowHelper = new THREE.ArrowHelper(sunRotation, new THREE.Vector3(0, 0, 0), 10000, 0xffff00)
 //scene.add(arrowHelper)
 
-// Groups
-// let groupMoon = new THREE.Group()
-//groupMoon.add(moon)
-const sun = new Celest(696342, null, 0, 6688.355) // Valeur approximative calculée par moi même
-const mercure = new Celest(2440, null, 5790905, 10.892, 47.362)
-const venus = new Celest(6052, null, 10820950, -6.52)
-const earth = new Celest(6378, null, 14959788.75, 1674.364)
-const moon = new Celest(1737, null, 14998228.65, 16.6572)
-const mars = new Celest(3390, null, 22794400, 868.220)
-const jupiter = new Celest(69911, null, 77834000, 47051)
-const saturne = new Celest(58232, null, 142670000, 34821)
-const uranus = new Celest(25461, null, 287070000, -9320)
-const neptune = new Celest(24622, null, 449840000, 9660)
-// Add to scenes
-//scene.add(groupMoon)
+// Rayon en km, material, demi grand axe en km, vitesse de rotation en km/h, vitesse orbitale moyenne en km/s
+const sun = new Celest(696342, null, 0, 6688.355, 0, 0) // Valeur approximative calculée par moi même
+const mercure = new Celest(2440, null, 5790905, 10.892, 47.362, 0.2056)
+const venus = new Celest(6052, null, 10820950, -6.52, 0, 0.00678)
+const earth = new Celest(6378, null, 14959788.75, 1674.364, 0, 0.01671022)
+const moon = new Celest(1737, null, 14998228.65, 16.6572, 0, 0)
+const mars = new Celest(3390, null, 22794400, 868.220, 0, 0.09339)
+const jupiter = new Celest(69911, null, 77834000, 47051, 0, 0.04839)
+const saturne = new Celest(58232, null, 142670000, 34821, 0, 0.0539)
+const uranus = new Celest(25461, null, 287070000, -9320, 0, 0.04726)
+const neptune = new Celest(24622, null, 449840000, 9660, 0, 0.00859)
 
+scene.add(mercure.ellipse)
+scene.add(venus.ellipse)
+scene.add(earth.ellipse)
+scene.add(mars.ellipse)
+scene.add(jupiter.ellipse)
+scene.add(saturne.ellipse)
+scene.add(uranus.ellipse)
+scene.add(neptune.ellipse)
+
+// Add to scenes
 scene.add(sun.mesh)
 scene.add(mercure.group)
 scene.add(venus.group)
@@ -48,49 +54,6 @@ scene.add(jupiter.group)
 scene.add(saturne.group)
 scene.add(uranus.group)
 scene.add(neptune.group)
-
-//scene.add(Geometry.sun)
-//scene.add(Geometry.mercure)
-//scene.add(Geometry.venus)
-//scene.add(Geometry.earth)
-//scene.add(Geometry.moon)
-//scene.add(Geometry.mars)
-//scene.add(Geometry.jupiter)
-//scene.add(Geometry.saturne)
-//scene.add(Geometry.uranus)
-//scene.add(Geometry.neptune)
-//scene.add(camera)
-// Set positions
-//Geometry.sun.position.x = 0
-//Geometry.sun.position.y = 0
-//Geometry.sun.position.z = 0
-//Geometry.mercure.position.x = 5790905
-//Geometry.mercure.position.y = 0
-//Geometry.mercure.position.z = 0
-//Geometry.venus.position.x = 10820950
-//Geometry.venus.position.y = 0
-//Geometry.venus.position.z = 0
-//Geometry.earth.position.x = 14959788.75
-//Geometry.earth.position.y = 0
-//Geometry.earth.position.z = 0
-//Geometry.moon.position.x = 14998228.65
-//Geometry.moon.position.y = 0
-//Geometry.moon.position.z = 0
-//Geometry.mars.position.x = 22794400
-//Geometry.mars.position.y = 0
-//Geometry.mars.position.z = 0
-//Geometry.jupiter.position.x = 77834000
-//Geometry.jupiter.position.y = 0
-//Geometry.jupiter.position.z = 0
-//Geometry.saturne.position.x = 142670000
-//Geometry.saturne.position.y = 0
-//Geometry.saturne.position.z = 0
-//Geometry.uranus.position.x = 287070000
-//Geometry.uranus.position.y = 0
-//Geometry.uranus.position.z = 0
-//Geometry.neptune.position.x = 449840000
-//Geometry.neptune.position.y = 0
-//Geometry.neptune.position.z = 0
 
 let ambientLight = new THREE.AmbientLight(0xffffff, 0.1)
 scene.add(ambientLight)
@@ -107,7 +70,7 @@ function animate() {
 
     sun.mesh.rotateY(sun.vRotation)
     
-    mercure.group.rotateY(mercure.vOrbitale) // Crée 2 objets qui tournent autour du soleil, ne sais pas encore pourquoi
+    mercure.group.rotateY(0.1047 / 60) // Crée 2 objets qui tournent autour du soleil, ne sais pas encore pourquoi
     mercure.mesh.rotateY(mercure.vRotation)
     
     venus.mesh.rotateY(venus.vRotation)
