@@ -1,5 +1,5 @@
 export class Celest {
-    constructor(r, material, demiGAxe, vRotation, vOrbitale, excentricite) {
+    constructor(r, material, demiGAxe, vRotation, vOrbitale, excentricite, textureLoader) {
         const geo = new THREE.SphereGeometry(r, 64, 64)
         const mat = material === null ? new THREE.MeshNormalMaterial() : material
         if (material === null)
@@ -14,6 +14,8 @@ export class Celest {
         this.vOrbitale = vOrbitale / 5
         this.excentricite = excentricite
         this.demiGAxe = demiGAxe
+        this.textureLoader = textureLoader
+        //this.textureLoader = new THREE.TextureLoader().load(textureLoader)
     }
 
     get ellipse() {

@@ -13,6 +13,7 @@ scene.background = new THREE.Color(0, 0, 0);
 const controls = new OrbitControls(camera, renderer.domElement)
 controls.minDistance = 100000
 controls.maxDistance = 100000000
+controls.addEventListener('change', render);
 
 // Helpers
 const axis = new THREE.AxesHelper(1000000)
@@ -22,17 +23,29 @@ scene.add(axis)
 //const arrowHelper = new THREE.ArrowHelper(sunRotation, new THREE.Vector3(0, 0, 0), 10000, 0xffff00)
 //scene.add(arrowHelper)
 
+// adding textures (images)
+const sunTexture = new THREE.TextureLoader().load('maps/sunmap.jpg')
+const mercureTexture = new THREE.TextureLoader().load('maps/mercurymap.jpg')
+const venusTexture = new THREE.TextureLoader().load('maps/venusmap.jpg')
+const earthTexture = new THREE.TextureLoader().load('maps/earthmap.jpg')
+const moonTexture = new THREE.TextureLoader().load('maps/moonmap.jpg')
+const marsTexture = new THREE.TextureLoader().load('maps/marsmap.jpg')
+const jupiterTexture = new THREE.TextureLoader().load('maps/jupitermap.jpg')
+const saturneTexture = new THREE.TextureLoader().load('maps/saturnringmap.jpg')
+const uranusTexture = new THREE.TextureLoader().load('maps/uranusmap.jpg')
+const neptuneTexture = new THREE.TextureLoader().load('maps/neptunemap.jpg')
+
 // Rayon en km, material, demi grand axe en km, vitesse de rotation en km/h, vitesse orbitale moyenne en km/s
-const sun = new Celest(696342, null, 0, 6688.355, 0, 0) // Valeur approximative calculée par moi même
-const mercure = new Celest(2440, null, 5790905, 10.892, 47.362, 0.2056)
-const venus = new Celest(6052, null, 10820950, -6.52, 0, 0.00678)
-const earth = new Celest(6378, null, 14959788.75, 1674.364, 0, 0.01671022)
-const moon = new Celest(1737, null, 14998228.65, 16.6572, 0, 0)
-const mars = new Celest(3390, null, 22794400, 868.220, 0, 0.09339)
-const jupiter = new Celest(69911, null, 77834000, 47051, 0, 0.04839)
-const saturne = new Celest(58232, null, 142670000, 34821, 0, 0.0539)
-const uranus = new Celest(25461, null, 287070000, -9320, 0, 0.04726)
-const neptune = new Celest(24622, null, 449840000, 9660, 0, 0.00859)
+const sun = new Celest(696342, null, 0, 6688.355, 0, 0, sunTexture) // Valeur approximative calculée par moi même, je suis le boss
+const mercure = new Celest(2440, null, 5790905, 10.892, 47.362, 0.2056, mercureTexture)
+const venus = new Celest(6052, null, 10820950, -6.52, 0, 0.00678, venusTexture)
+const earth = new Celest(6378, null, 14959788.75, 1674.364, 0, 0.01671022, earthTexture)
+const moon = new Celest(1737, null, 14998228.65, 16.6572, 0, 0, moonTexture)
+const mars = new Celest(3390, null, 22794400, 868.220, 0, 0.09339, marsTexture)
+const jupiter = new Celest(69911, null, 77834000, 47051, 0, 0.04839, jupiterTexture)
+const saturne = new Celest(58232, null, 142670000, 34821, 0, 0.0539, saturneTexture)
+const uranus = new Celest(25461, null, 287070000, -9320, 0, 0.04726, uranusTexture)
+const neptune = new Celest(24622, null, 449840000, 9660, 0, 0.00859, neptuneTexture)
 
 scene.add(mercure.ellipse)
 scene.add(venus.ellipse)
@@ -90,7 +103,7 @@ function animate() {
     neptune.mesh.rotateY(neptune.vRotation)
     
     requestAnimationFrame(animate)
-    renderer.render(scene, camera)
+    render();
 }
 
 animate()
@@ -99,7 +112,11 @@ function updateViewportSize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix()
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.render(scene, camera);
+    render();
   }
+
+function render(){
+  renderer.render(scene, camera);
+}  
 
 window.addEventListener("resize", updateViewportSize);
