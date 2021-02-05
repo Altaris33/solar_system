@@ -36,7 +36,7 @@ export class Celest {
             0
         )
 
-        const points = curve.getPoints(100)
+        const points = curve.getPoints(250)
         const geometry = new THREE.BufferGeometry().setFromPoints(points)
         const material = new THREE.LineBasicMaterial({color: 0xff0000})
         return new THREE.Line(geometry, material)

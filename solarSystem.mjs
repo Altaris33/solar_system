@@ -7,6 +7,17 @@ document.body.appendChild(renderer.domElement);
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 10000, 100000000)
+const mercuryCamera = new THREE.PerspectiveCamera (75, window.innerWidth / window.innerHeight, 10000, 100000000);
+const venusCamera = new THREE.PerspectiveCamera (75, window.innerWidth / window.innerHeight, 10000, 100000000);
+const earthCamera = new THREE.PerspectiveCamera (75, window.innerWidth / window.innerHeight, 10000, 100000000);
+const marsCamera = new THREE.PerspectiveCamera (75, window.innerWidth / window.innerHeight, 10000, 100000000);
+const jupiterCamera = new THREE.PerspectiveCamera (75, window.innerWidth / window.innerHeight, 10000, 100000000);
+const saturnCamera = new THREE.PerspectiveCamera (75, window.innerWidth / window.innerHeight, 10000, 100000000);
+const uranusCamera = new THREE.PerspectiveCamera (75, window.innerWidth / window.innerHeight, 10000, 100000000);
+const neptuneCamera = new THREE.PerspectiveCamera (75, window.innerWidth / window.innerHeight, 10000, 100000000);
+
+
+
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0, 0, 0);
 
